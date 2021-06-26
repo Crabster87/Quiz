@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Quiz</string>
+    <string name="question">2 + 2 = 4</string>
+    <string name="question1">Moscow is the capital of Russia</string>
+    <string name="question2">8 - 6 = 3</string>
+    <string name="question3">5 + 3 = 7</string>
+    <string name="question4">10 - 8 = 2</string>
+    <string name="yes_btn">yes</string>
+    <string name="no_btn">no</string>
+    <string name="correct">Correctly</string>
+    <string name="incorrect">Incorrectly</string>
+</resources>
