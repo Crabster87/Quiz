@@ -2,6 +2,7 @@ package crabster.rudakov.quiz;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,15 +14,23 @@ public class MainActivity extends AppCompatActivity {
 
     private Button yesBtn;
     private Button noBtn;
+    private Button showAnswer;
     private TextView questionTextView;
     private Question[] questions = {
-            new Question(R.string.question, true),
             new Question(R.string.question1, true),
-            new Question(R.string.question2, false),
+            new Question(R.string.question2, true),
             new Question(R.string.question3, false),
-            new Question(R.string.question4, true)
+            new Question(R.string.question4, false),
+            new Question(R.string.question5, true),
+            new Question(R.string.question6, false),
+            new Question(R.string.question7, true),
+            new Question(R.string.question8, false),
+            new Question(R.string.question9, true),
+            new Question(R.string.question10, false)
     };
     private int questionIndex = 0;
+    private StringBuilder results = new StringBuilder();
+    private int rating = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,22 +38,35 @@ public class MainActivity extends AppCompatActivity {
         Log.d("SYSTEM INFO", "Method onCreate() is working");
         setContentView(R.layout.activity_main);
         if (savedInstanceState != null) {
-            questionIndex = savedInstanceState.getInt("question", 0);
+            questionIndex = savedInstanceState.getInt("question");
         }
 
         questionTextView = findViewById(R.id.questionTextView);
         questionTextView.setText(questions[questionIndex].getQuestion());
 
-        yesBtn = findViewById(R.id.yesbtn);
-        noBtn = findViewById(R.id.nobtn);
+        yesBtn = findViewById(R.id.yesBtn);
+        noBtn = findViewById(R.id.noBtn);
+        showAnswer = findViewById(R.id.showAnswer);
 
         yesBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                results.append("The question was: " + getString(questions[questionIndex].getQuestion()) + "\""
+                                        + "\n" + "Your answer was: " + "YES\"\n");
+
                 if (questions[questionIndex].isAnswer()) {
+                    rating += 10;
                     Toast.makeText(MainActivity.this, R.string.correct, Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this, R.string.incorrect, Toast.LENGTH_SHORT).show();
+                }
+                if (questionIndex >= questions.length - 1) {
+                    Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                    intent.putExtra("results", results.toString());
+                    intent.putExtra("rating", rating);
+                    startActivity(intent);
+                    rating = 0;
+                    results = new StringBuilder();
                 }
                 questionIndex = (questionIndex + 1) % questions.length;
                 questionTextView.setText(questions[questionIndex].getQuestion());
@@ -54,13 +76,33 @@ public class MainActivity extends AppCompatActivity {
         noBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                results.append("The question was: " + getString(questions[questionIndex].getQuestion()) + "\""
+                        + "\n" + "Your answer was: " + "NO\"\n");
                 if (!questions[questionIndex].isAnswer()) {
+                    rating += 10;
                     Toast.makeText(MainActivity.this, R.string.correct, Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(MainActivity.this, R.string.incorrect, Toast.LENGTH_SHORT).show();
                 }
+                if (questionIndex >= questions.length - 1) {
+                    Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                    intent.putExtra("results", results.toString());
+                    intent.putExtra("rating", rating);
+                    startActivity(intent);
+                    rating = 0;
+                    results = new StringBuilder();
+                }
                 questionIndex = (questionIndex + 1) % questions.length;
                 questionTextView.setText(questions[questionIndex].getQuestion());
+            }
+        });
+
+        showAnswer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AnswerActivity.class);
+                intent.putExtra("answer", questions[questionIndex].isAnswer());
+                startActivity(intent);
             }
         });
     }

@@ -1,12 +1,21 @@
 <resources>
     <string name="app_name">Quiz</string>
-    <string name="question">2 + 2 = 4</string>
-    <string name="question1">Moscow is the capital of Russia</string>
-    <string name="question2">8 - 6 = 3</string>
-    <string name="question3">5 + 3 = 7</string>
-    <string name="question4">10 - 8 = 2</string>
+    <string name="question1">Stockholm is the capital of Sweden</string>
+    <string name="question2">Moscow is the capital of Russia</string>
+    <string name="question3">Rio de Janeiro is the capital of Brazil</string>
+    <string name="question4">Sydney is the capital of Australia</string>
+    <string name="question5">Lima is the capital of Peru</string>
+    <string name="question6">Geneva is the capital of Switzerland</string>
+    <string name="question7">Abu Dhabi is the capital of United Arab Emirates</string>
+    <string name="question8">Yangon is the capital of Myanmar</string>
+    <string name="question9">Cairo is the capital of Egypt</string>
+    <string name="question10">Istanbul is the capital of Turkey</string>
     <string name="yes_btn">yes</string>
     <string name="no_btn">no</string>
     <string name="correct">Correctly</string>
     <string name="incorrect">Incorrectly</string>
+    <string name="correct_answer">Correct answer</string>
+    <string name="show_answer">Show Answer</string>
+    <string name="your_results">Your results</string>
+    <string name="your_mark">Your total mark</string>
 </resources>
